@@ -95,6 +95,7 @@ class Pedidos(db.Model):
     data = db.Column(db.String(100), nullable=False)
     codigo = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(100), unique=False)
+    user_id = db.Column(db.Integer, nullable=True)
     # itens = db.Column(db.ARRAY(db.relationship('Item', secondary="pedido_item", lazy='subquery',
     #     backref=db.backref('pedidos', lazy=True))))
     # itens = db.relationship('Item', backref='pedidos', lazy=True)
@@ -254,7 +255,7 @@ def add_item():
 # endpoint to show all items
 @app.route("/item", methods=["GET"])
 def get_item():
-    all_items = User.query.all()
+    all_items = Item.query.all()
     dict_result = {}
     for entry in all_items:
         user_dict = entry.to_dict()
